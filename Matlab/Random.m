@@ -1,0 +1,42 @@
+U = rand(1000, 1); X = randn(1000,1);
+a = 5; b = 10;
+V = a + (b - a) * U;
+mean_Y = 5; std_Y = 10;
+Y = mean_Y + std_Y * X;
+VM1 = mean(V.^1); 
+VM2=mean(V.^2);
+VM3=mean(V.^3);
+VM4=mean(V.^4);
+VCM1 = 0;
+VCM2 = mean((V - mean(V)).^2); 
+VCM3 = mean((V - mean(V)).^3);
+VCM4 = mean((V - mean(V)).^4); 
+YM1 = mean(Y.^1); 
+YM2=mean(Y.^2);
+YM3=mean(Y.^3);
+YM4=mean(Y.^4);
+YCM1 = 0;
+YCM2 = mean((Y - mean(Y)).^2); 
+YCM3 = mean((Y - mean(Y)).^3);
+YCM4 = mean((Y - mean(Y)).^4); 
+fprintf("Moments and Central Moments for V:\n");
+fprintf("First Moment: %.4f\n", VM1);
+fprintf("Second Moment: %.4f\n", VM2);
+fprintf("Third Moment: %.4f\n", VM3);
+fprintf("Fourth Moment: %.4f\n", VM4);
+disp(newline)
+fprintf("First Central Moment (Variance): %.4f\n", VCM1);
+fprintf("Second Central Moment (Variance): %.4f\n", VCM2);
+fprintf("Third Central Moment: %.4f\n", VCM3);
+fprintf("Fourth Central Moment: %.4f\n", VCM4);
+disp(newline)
+fprintf("\nMoments and Central Moments for Y:\n");
+fprintf("First Moment: %.4f\n", YM1);
+fprintf("Second Moment: %.4f\n", YM2);
+fprintf("Third Moment: %.4f\n", YM3);
+fprintf("Fourth Moment: %.4f\n", YM4);
+disp(newline)
+fprintf("First Central Moment (Variance): %.4f\n", YCM1);
+fprintf("Second Central Moment (Variance): %.4f\n", YCM2);
+fprintf("Third Central Moment: %.4f\n", YCM3);
+fprintf("Fourth Central Moment: %.4f\n", YCM4);

@@ -1,0 +1,48 @@
+function Regression_Newtonsmethod()
+    syms x;
+    f = x^2 +1; % Corrected the function definition
+    W = NewtonsMethod(f, x);
+    disp('Final regression model:');
+    disp(W)
+    PlotMyModelAndData(f, x, W);
+end
+
+function PlotMyModelAndData(f, x, W)
+    x_values = linspace(-5, 5, 1000); % Creates 1000 points between -5 and 5
+
+    % Evaluate the function for the x values
+    y_values = double(subs(f, x, x_values)); % Convert symbolic to numeric
+    
+    % Plot the function
+    plot(x_values, y_values, 'b-', 'LineWidth', 2);
+    xlabel('x');
+    ylabel('f(x)');
+    title('Plot of f(x) = x^2 + x + 3x'); % Corrected the title
+    grid on;
+    ylim([-5, 25]); % Adjust y-axis limits based on the function range
+    
+    % Plot the minimum point found by Newton's method
+    hold on;
+    x_point = W;
+    y_point = double(subs(f, x, x_point)); % Evaluate the function at the minimum point
+    plot(x_point, y_point, 'ro', 'MarkerSize', 10, 'MarkerFaceColor', 'r');
+    legend('f(x)', 'Minimum point');
+    hold off;
+end
+
+function W = NewtonsMethod(f, x)
+    condition = true;
+    x_old = 1; % Initialize a variable to keep track of the previous x value
+    
+    while condition
+        x_new = x_old - double(subs(f/diff(f), x, x_old)) % Evaluate the iteration
+
+        if abs(x_new - x_old) < 0.00001 % Check for convergence
+            condition = false;
+        end
+        
+        x_old = x_new; % Update the previous x value for the next iteration
+    end
+    
+    W = x_new; % Return the final result after convergence
+end
